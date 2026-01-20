@@ -93,16 +93,6 @@ const dataLolos={
 };
 
 <script>
-function namaGrup(jabatan){
-  return jabatan
-    .replace("Kepala ", "")
-    .replace("Staf ", "")
-    .replace("Ketua ", "")
-    .replace("Wakil ", "");
-}
-</script>
-
-<script>
 function cekHasil(){
 const v=document.getElementById("kode").value.trim();
 const h=document.getElementById("hasil");
@@ -123,4 +113,3 @@ h.innerHTML=`SELAMAT 🎉<br><br>Nama: ${p[1]}<br>NIM: ${nim}<br><br>${j}
 </script>
 </body>
 </html>
-

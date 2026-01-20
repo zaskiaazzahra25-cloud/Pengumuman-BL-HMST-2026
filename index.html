@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengumuman Hasil Seleksi | BL HMST 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0b0b0b, #3b0a0a, #1a0000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      color: #f5f5f5;
+    }
+    .card {
+      background: rgba(20,20,20,0.9);
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 760px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      border: 1px solid rgba(128,0,0,0.4);
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #800000;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 28px; margin-bottom: 10px; }
+    .subtitle { opacity: 0.85; margin-bottom: 24px; }
+    .highlight {
+      background: rgba(128,0,0,0.25);
+      border-left: 4px solid #800000;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 12px;
+      background: #111;
+      color: #fff;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: #800000;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    #hasil {
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="badge">Pengumuman Resmi</span>
+    <h1>Hasil Seleksi Calon Pengurus<br>BL HMST 2026</h1>
+    <p class="subtitle">Masukkan <strong>Nama Lengkap</strong> Anda untuk melihat hasil seleksi.</p>
+
+    <div class="highlight">
+      Hasil seleksi bersifat <strong>FINAL</strong> dan tidak dapat diganggu gugat.
+    </div>
+
+    <input type="text" id="namaInput" placeholder="Masukkan Nama Lengkap">
+    <button onclick="cekHasil()">Cek Hasil Seleksi</button>
+
+    <div id="hasil"></div>
+  </div>
+
+  <script>
+    // DATA PESERTA (SEMUA DISIMPAN HURUF KECIL)
+    const dataPeserta = {
+      "nazia fauziatummuslimah": "Kepala Badan Administrasi",
+      "hanna dame olypia tampubolon": "Staf Badan Administrasi",
+      "ibnu sina maulana": "Staf Badan Administrasi",
+      "lita dwi aryani": "Kepala Badan Keuangan",
+      "alini hatifa zahra": "Staf Badan Keuangan",
+      "jovelio curtis ibrani manurung": "Staf Badan Keuangan",
+      "reneisha puri azzahra": "Kepala Badan Aspirasi dan Pengembangan",
+      "etsa tharifa": "Staf Badan Aspirasi dan Pengembangan",
+      "hengky galang pratama": "Staf Badan Aspirasi dan Pengembangan",
+      "sukron hafizh": "Staf Badan Aspirasi dan Pengembangan",
+      "zaskia az zahra": "Kepala Badan Urusan Rumah Tangga",
+      "raihan bayu pratama": "Staf Badan Urusan Rumah Tangga",
+      "sahra raditiya fadillah": "Staf Badan Urusan Rumah Tangga",
+      "amalia putri martendi": "Kepala Badan Legislasi",
+      "bagas satria ramadhan": "Staf Badan Legislasi",
+      "raffa yazid maulana": "Staf Badan Legislasi",
+      "laila masruroh": "Ketua Komisi I",
+      "habibi asy'ari": "Staf Komisi I",
+      "naila fathia husna": "Staf Komisi I",
+      "septia aminarti": "Staf Komisi I",
+      "naila fauziah ahmad": "Kepala Komisi II",
+      "febby ayuningtiyas putri": "Staf Komisi II",
+      "tasya rahmadaniah": "Staf Komisi II",
+      "rayya alfaiza anasha": "Staf Komisi II",
+      "dyah puspita sari": "Kepala Komisi III",
+      "habiburrahman el rabbani": "Staf Komisi III",
+      "anis fitria ramadani": "Staf Komisi III",
+      "nathaniela zazkiadewi haryada": "Kepala Komisi IV",
+      "nailah hasanah": "Staf Komisi IV",
+      "krysna rahulia sinaga": "Staf Komisi IV"
+    };
+
+    function cekHasil() {
+      const inputNama = document.getElementById("namaInput").value.trim().toLowerCase();
+      const hasil = document.getElementById("hasil");
+
+      if (!inputNama) {
+        hasil.style.color = "#facc15";
+        hasil.innerHTML = "Silakan masukkan <strong>nama lengkap</strong> terlebih dahulu.";
+        return;
+      }
+
+      if (dataPeserta[inputNama]) {
+        hasil.style.color = "#22c55e";
+        hasil.innerHTML = `
+          <strong>SELAMAT 🎉</strong><br><br>
+          Anda dinyatakan <strong>LOLOS</strong> sebagai:<br>
+          <strong>${dataPeserta[inputNama]}</strong><br>
+          Badan Legislatif HMST 2025–2026
+        `;
+      } else {
+        hasil.style.color = "#f87171";
+        hasil.innerHTML = `
+          <strong>Mohon Maaf</strong><br><br>
+          Anda <strong>belum dinyatakan lolos</strong><br>
+          sebagai Pengurus Badan Legislatif HMST 2025–2026.<br><br>
+          Terima kasih atas partisipasi Anda.
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

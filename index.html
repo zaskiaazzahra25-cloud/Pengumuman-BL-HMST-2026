@@ -92,6 +92,17 @@ const dataLolos={
 "fauzia nisrina salsabila":"Wakil Ketua Badan Legislatif"
 };
 
+<script>
+function namaGrup(jabatan){
+  return jabatan
+    .replace("Kepala ", "")
+    .replace("Staf ", "")
+    .replace("Ketua ", "")
+    .replace("Wakil ", "");
+}
+</script>
+
+<script>
 function cekHasil(){
 const v=document.getElementById("kode").value.trim();
 const h=document.getElementById("hasil");
@@ -103,11 +114,13 @@ if(dataLolos[n]){
 const j=dataLolos[n];
 h.innerHTML=`SELAMAT 🎉<br><br>Nama: ${p[1]}<br>NIM: ${nim}<br><br>${j}
 <div class="btn-group">
-<a class="btn-link" href="${grupUmum}" target="_blank">Gabung Grup BL HMST 2026</a>
-<a class="btn-link secondary" href="${grupKomisi[j]}" target="_blank">Gabung Grup ${j}</a>
+<a class="btn-link secondary" href="${grupKomisi[j]}" target="_blank">
+  Gabung Grup ${namaGrup(j)}
+</a>
 </div>`;
 }else{h.innerHTML="Mohon maaf, Anda belum dinyatakan lolos.";}
 }
 </script>
 </body>
 </html>
+
